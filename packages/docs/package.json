@@ -1,0 +1,28 @@
+{
+	"name": "docs",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Plugin docs",
+	"author": "Noé Gnanih <noegnanih@gmail.com>",
+	"homepage": "",
+	"license": "MIT",
+	"main": "index.ts",
+	"directories": {
+		"plugin": "lib",
+		"test": "__tests__"
+	},
+	"files": [
+		"lib"
+	],
+	"scripts": {
+		"dev": "vitepress dev .",
+		"build": "vitepress build .",
+		"lint": "eslint '.vitepress/**/*.{ts,vue}'"
+	},
+	"dependencies": {
+		"@arkn/pinia-persistedstate-plugin": "workspace:*"
+	},
+	"devDependencies": {
+		"vitepress": "^1.0.0-alpha.46"
+	}
+}
