@@ -6,14 +6,14 @@
 		},
 		// Plugin
 		{
-			"path": "./packages/lib/tsconfig.app.json"
+			"path": "./packages/plugin/tsconfig.app.json"
 		},
 		{
-			"path": "./packages/lib/tsconfig.vitest.json"
+			"path": "./packages/plugin/tsconfig.vitest.json"
 		},
 		// Playground
 		{
-			"path": "./packages/lib/tsconfig.app.json"
+			"path": "./packages/playground/tsconfig.app.json"
 		}
 	]
 }

@@ -38,7 +38,7 @@ export default defineConfig({
 	],
 	build: {
 		lib: {
-			name: 'BreezeUI',
+			name: 'PiniaPersistedStatePlugin',
 			entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
 			formats: ['es', 'cjs', 'iife'],
 			fileName: (format) => {

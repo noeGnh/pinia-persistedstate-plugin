@@ -1,7 +1,7 @@
 {
 	"name": "@arkn/pinia-persistedstate-plugin",
-	"description": "A collection of components to handle ui with Breeze",
-	"version": "0.0.2",
+	"description": "Pinia persisted state plugin",
+	"version": "0.0.1",
 	"private": false,
 	"author": "Noé Gnanih <noegnanih@gmail.com>",
 	"license": "MIT",
@@ -25,8 +25,8 @@
 	"scripts": {
 		"dev-server": "pnpm --parallel vite",
 		"dev-types": "vue-tsc  --noEmit -p tsconfig.app.json --watch",
-		"build": "yarn build-lib && yarn build-types",
-		"build-lib": "vite build",
+		"build": "yarn build-plugin && yarn build-types",
+		"build-plugin": "vite build",
 		"build-types": "vue-tsc --emitDeclarationOnly --declaration -p tsconfig.app.json",
 		"lint": "eslint 'src/**/*.{ts,vue}'",
 		"test": "vitest",
@@ -34,7 +34,7 @@
 		"version": "auto-changelog --template keepachangelog --hide-credit -p && git add CHANGELOG.md"
 	},
 	"peerDependencies": {
-		"vue": "^3.2.45"
+		"pinia": "^2.0.0"
 	},
 	"devDependencies": {
 		"auto-changelog": "^2.4.0",
@@ -46,7 +46,7 @@
 		"url": "git+https://github.com/noeGnh/pinia-persistedstate-plugin.git"
 	},
 	"keywords": [
-		"breeze",
+		"pinia",
 		"pinia-persistedstate-plugin"
 	],
 	"bugs": {

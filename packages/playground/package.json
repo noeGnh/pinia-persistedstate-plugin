@@ -8,8 +8,9 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"vue": "^3.2.45",
-		"@arkn/pinia-persistedstate-plugin": "workspace:*"
+		"@arkn/pinia-persistedstate-plugin": "workspace:*",
+		"pinia": "^2.0.33",
+		"vue": "^3.2.45"
 	},
 	"devDependencies": {
 		"vite": "^4.1.0",
