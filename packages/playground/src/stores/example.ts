@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
 
-const state = () => ({})
+const state = () => ({
+	message: 'Hello world',
+})
 
 const getters = {}
 
 const actions = {}
 
-export const useGlobalStore = defineStore('sample', {
+export const useExampleStore = defineStore('example', {
 	state,
 	getters,
 	actions,
