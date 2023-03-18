@@ -1,3 +1,10 @@
+export interface StorageItem {
+	key?: string
+	storage?: Storage
+	paths?: string[]
+}
+
 export interface Options {
-	persist: boolean
+	persistByDefault: boolean
+	storages?: StorageItem[]
 }
