@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 
 const state = () => ({
 	message: 'Hello world',
+	count: 0,
 })
 
 const getters = {}

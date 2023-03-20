@@ -5,7 +5,9 @@
 </script>
 
 <template>
-	{{ exampleStore.message }}
+	<button @click="exampleStore.count += 1">
+		{{ exampleStore.message }} - {{ exampleStore.count }}
+	</button>
 </template>
 
 <style scoped></style>
