@@ -36,10 +36,10 @@ export default defineConfig({
 	],
 	resolve: {
 		alias: {
-			'@arkn/pinia-persistedstate-plugin':
+			'pinia-persistence-plugin':
 				process.env.NODE_ENV === 'production'
-					? '@arkn/pinia-persistedstate-plugin'
-					: '@arkn/pinia-persistedstate-plugin/src/index.ts',
+					? 'pinia-persistence-plugin'
+					: 'pinia-persistence-plugin/src/index.ts',
 		},
 		dedupe: ['vue'],
 	},
@@ -50,7 +50,7 @@ export default defineConfig({
 		},
 	},
 	optimizeDeps: {
-		exclude: ['@arkn/pinia-persistedstate-plugin'],
+		exclude: ['pinia-persistence-plugin'],
 	},
 	server: {
 		port: 4320,

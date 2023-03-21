@@ -1,5 +1,5 @@
 {
-	"name": "pinia-persistedstate-plugin-monorepo",
+	"name": "pinia-persistence-plugin-monorepo",
 	"version": "0.0.0",
 	"description": "Pinia plugin for handle your data persistence",
 	"author": "Noé Gnanih <noegnanih@gmail.com>",
@@ -11,9 +11,9 @@
 	"scripts": {
 		"docs": "pnpm -F docs run dev",
 		"dev": "pnpm -F playground run dev",
-		"test": "pnpm -F '@arkn/*' run test",
+		"test": "pnpm -F pinia-persistence-plugin run test",
 		"build": "pnpm build-plugin && pnpm build-playground && pnpm build-docs",
-		"build-plugin": "pnpm -r -F '@arkn/*' run build",
+		"build-plugin": "pnpm -r -F pinia-persistence-plugin run build",
 		"build-playground": "pnpm -F playground run build",
 		"build-docs": "pnpm -F docs run build",
 		"lint": "eslint --ext .js,.ts,.vue .",

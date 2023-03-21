@@ -20,7 +20,7 @@
 		"lint": "eslint '.vitepress/**/*.{ts,vue}'"
 	},
 	"dependencies": {
-		"@arkn/pinia-persistedstate-plugin": "workspace:*"
+		"pinia-persistence-plugin": "workspace:*"
 	},
 	"devDependencies": {
 		"vitepress": "^1.0.0-alpha.46"

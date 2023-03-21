@@ -1,6 +1,6 @@
 {
-	"name": "@arkn/pinia-persistedstate-plugin",
-	"description": "Pinia persisted state plugin",
+	"name": "pinia-persistence-plugin",
+	"description": "Pinia persistence plugin",
 	"version": "0.0.1",
 	"private": false,
 	"author": "Noé Gnanih <noegnanih@gmail.com>",
@@ -43,16 +43,18 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/noeGnh/pinia-persistedstate-plugin.git"
+		"url": "git+https://github.com/noeGnh/pinia-persistence-plugin.git"
 	},
 	"keywords": [
+		"vue",
 		"pinia",
-		"pinia-persistedstate-plugin"
+		"persistence",
+		"pinia-plugin"
 	],
 	"bugs": {
-		"url": "https://github.com/noeGnh/pinia-persistedstate-plugin/issues"
+		"url": "https://github.com/noeGnh/pinia-persistence-plugin/issues"
 	},
-	"homepage": "https://github.com/noeGnh/pinia-persistedstate-plugin#readme",
+	"homepage": "https://github.com/noeGnh/pinia-persistence-plugin#readme",
 	"publishConfig": {
 		"access": "public"
 	}

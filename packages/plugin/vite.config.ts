@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url'
 export default defineConfig({
 	build: {
 		lib: {
-			name: 'PiniaPersistedStatePlugin',
+			name: 'PiniaPersistencePlugin',
 			entry: fileURLToPath(new URL('./src/index.ts', import.meta.url)),
 			formats: ['es', 'cjs', 'iife'],
 			fileName: (format) => {

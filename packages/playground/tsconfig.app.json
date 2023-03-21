@@ -13,7 +13,7 @@
 		"skipLibCheck": true,
 		"noEmit": true,
 		"forceConsistentCasingInFileNames": true,
-		"types": ["@arkn/pinia-persistedstate-plugin"]
+		"types": ["pinia-persistence-plugin"]
 	},
 	"include": [
 		"src/**/*.ts",

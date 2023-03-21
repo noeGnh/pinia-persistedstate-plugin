@@ -1,8 +1,8 @@
 import { createPinia } from 'pinia'
-import { persistedStatePlugin } from '@arkn/pinia-persistedstate-plugin'
+import { persistencePlugin } from 'pinia-persistence-plugin'
 
 export default createPinia().use(
-	persistedStatePlugin({
+	persistencePlugin({
 		storeKeysPrefix: 'test',
 		persistenceDefault: false,
 		storageItemsDefault: [

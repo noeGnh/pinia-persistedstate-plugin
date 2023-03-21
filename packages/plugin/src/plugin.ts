@@ -7,9 +7,7 @@ import type {
 } from './interface'
 import { isStorageItem } from './interface'
 
-export function persistedStatePlugin(
-	pluginOptions?: PluginOptions
-): PiniaPlugin {
+export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 	const getStoreKey = (
 		storageItem: PluginStorageItem | StorageItem,
 		defaultKey: string

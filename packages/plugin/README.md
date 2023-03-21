@@ -1,11 +1,11 @@
-# pinia-persistedstate-plugin ![npm (scoped)](https://img.shields.io/npm/v/@arkn/pinia-persistedstate-plugin)
+# pinia-persistence-plugin ![npm (scoped)](https://img.shields.io/npm/v/pinia-persistence-plugin)
 
 Pinia plugin for handle your data persistence.
 
 ## Installation
 
 ```sh
-pnpm add @arkn/pinia-persistedstate-plugin
+pnpm add pinia-persistence-plugin
 ```
 
 ## Usage
@@ -18,4 +18,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Changelog
 
-Detailed changes for each release are documented in the [release notes](https://github.com/noeGnh/pinia-persistedstate-plugin/releases).
+Detailed changes for each release are documented in the [release notes](https://github.com/noeGnh/pinia-persistence-plugin/releases).

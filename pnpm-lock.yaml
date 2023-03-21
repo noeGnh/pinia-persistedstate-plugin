@@ -63,31 +63,31 @@ importers:
 
   packages/docs:
     specifiers:
-      '@arkn/pinia-persistedstate-plugin': workspace:*
+      pinia-persistence-plugin: workspace:*
       vitepress: ^1.0.0-alpha.46
     dependencies:
-      '@arkn/pinia-persistedstate-plugin': link:../plugin
+      pinia-persistence-plugin: link:../plugin
     devDependencies:
       vitepress: 1.0.0-alpha.46_2r467mdhb7mblpaox4bg7fatdi
 
   packages/playground:
     specifiers:
-      '@arkn/pinia-persistedstate-plugin': workspace:*
       '@types/js-cookie': ^3.0.3
       js-cookie: ^3.0.1
       json-stringify-safe: ^5.0.1
       localforage: ^1.10.0
       pinia: ^2.0.33
+      pinia-persistence-plugin: workspace:*
       secure-ls: ^1.2.6
       vite: ^4.1.0
       vue: ^3.2.45
       vue-tsc: ^1.0.24
     dependencies:
-      '@arkn/pinia-persistedstate-plugin': link:../plugin
       js-cookie: 3.0.1
       json-stringify-safe: 5.0.1
       localforage: 1.10.0
       pinia: 2.0.33_hmuptsblhheur2tugfgucj7gc4
+      pinia-persistence-plugin: link:../plugin
       secure-ls: 1.2.6
       vue: 3.2.47
     devDependencies:

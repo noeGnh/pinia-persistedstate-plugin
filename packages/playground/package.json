@@ -8,7 +8,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@arkn/pinia-persistedstate-plugin": "workspace:*",
+		"pinia-persistence-plugin": "workspace:*",
 		"js-cookie": "^3.0.1",
 		"json-stringify-safe": "^5.0.1",
 		"localforage": "^1.10.0",
