@@ -2,29 +2,57 @@ import type { PiniaPluginContext, PiniaPlugin } from 'pinia'
 import type { PluginOptions, PluginStorageItem, StorageItem } from './interface'
 import { isStorageItem } from './interface'
 
-export const updateStorage = (
-	storageItem: PluginStorageItem | StorageItem,
-	store: PiniaPluginContext['store']
-) => {
-	const storage = storageItem.storage || localStorage
-	const storeKey =
-		(isStorageItem(storageItem) ? storageItem?.key : store.$id) || store.$id
-
-	if (storageItem.paths && storageItem.paths.length) {
-		const partialState = storageItem.paths.reduce((finalObj, key) => {
-			finalObj[key] = store.$state[key]
-			return finalObj
-		}, {} as Partial<PiniaPluginContext['store']['$state']>)
-
-		storage.setItem(storeKey, JSON.stringify(partialState))
-	} else {
-		storage.setItem(storeKey, JSON.stringify(store.$state))
-	}
-}
-
 export function persistedStatePlugin(
 	pluginOptions?: PluginOptions
 ): PiniaPlugin {
+	const getStoreKey = (
+		storageItem: PluginStorageItem | StorageItem,
+		defaultKey: string
+	) => {
+		return (
+			(pluginOptions?.storeKeysPrefix || '') +
+			((isStorageItem(storageItem) ? storageItem?.key : defaultKey) ||
+				defaultKey)
+		)
+	}
+
+	const updateStorage = (
+		storageItem: PluginStorageItem | StorageItem,
+		store: PiniaPluginContext['store'],
+		key: string
+	) => {
+		const storage = storageItem.storage || localStorage
+		const serialize = storageItem.serialize || JSON.stringify
+		let state = store.$state
+
+		const hasExcludedPaths =
+			Array.isArray(storageItem.excludePaths) && storageItem.excludePaths.length
+
+		if (
+			Array.isArray(storageItem.includePaths) &&
+			storageItem.includePaths.length
+		) {
+			state = storageItem.includePaths.reduce((finalObj, path) => {
+				if (
+					!hasExcludedPaths ||
+					(hasExcludedPaths && !storageItem.excludePaths?.includes(path))
+				)
+					finalObj[path] = store.$state[path]
+				return finalObj
+			}, {} as Partial<PiniaPluginContext['store']['$state']>)
+		} else {
+			if (hasExcludedPaths) {
+				Object.keys(store.$state).reduce((finalObj, path) => {
+					if (!storageItem.excludePaths?.includes(path))
+						finalObj[path] = store.$state[path]
+					return finalObj
+				}, {} as Partial<PiniaPluginContext['store']['$state']>)
+			}
+		}
+
+		storage.setItem(key, serialize(state))
+	}
+
 	return (context: PiniaPluginContext) => {
 		const defaultStorages: PluginStorageItem[] | StorageItem[] = pluginOptions
 			?.storageItemsDefault?.length
@@ -54,20 +82,23 @@ export function persistedStatePlugin(
 				: defaultStorages
 			storageItems.forEach((storageItem) => {
 				const storage = storageItem.storage || localStorage
-				const storeKey =
-					(isStorageItem(storageItem) ? storageItem?.key : context.store.$id) ||
-					context.store.$id
+				const deserialize = storageItem.deserialize || JSON.parse
+				const storeKey = getStoreKey(storageItem, context.store.$id)
 				const storageResult = storage.getItem(storeKey)
 
 				if (storageResult) {
-					context.store.$patch(JSON.parse(storageResult))
-					updateStorage(storageItem, context.store)
+					context.store.$patch(deserialize(storageResult))
+					updateStorage(storageItem, context.store, storeKey)
 				}
 			})
 
 			context.store.$subscribe(() => {
 				storageItems.forEach((storageItem) => {
-					updateStorage(storageItem, context.store)
+					updateStorage(
+						storageItem,
+						context.store,
+						getStoreKey(storageItem, context.store.$id)
+					)
 				})
 			})
 		}

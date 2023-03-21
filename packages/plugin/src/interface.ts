@@ -1,9 +1,18 @@
-import 'pinia'
+import { StateTree } from 'pinia'
 
-export interface StorageItem {
+export interface AsyncStorage {
+	getItem: (key: string) => Promise<any>
+	setItem: (key: string, value: any) => Promise<void>
+	removeItem: (key: string) => Promise<void>
+}
+
+export interface StorageItem<S extends StateTree = StateTree> {
 	key?: string
 	storage?: Storage
-	paths?: string[]
+	includePaths?: string[]
+	excludePaths?: string[]
+	serialize?: (state: S) => any
+	deserialize?: (value: any) => any
 }
 
 export type PluginStorageItem = Omit<StorageItem, 'key'>
@@ -13,6 +22,7 @@ export function isStorageItem(item: any): item is StorageItem {
 }
 
 export interface PluginOptions {
+	storeKeysPrefix?: string
 	persistenceDefault?: boolean
 	storageItemsDefault?: PluginStorageItem[]
 }
