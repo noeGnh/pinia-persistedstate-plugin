@@ -25,30 +25,21 @@ export function persistedStatePlugin(
 		const serialize = storageItem.serialize || JSON.stringify
 		let state = store.$state
 
-		const hasExcludedPaths =
-			Array.isArray(storageItem.excludePaths) && storageItem.excludePaths.length
+		state = Object.keys(store.$state).reduce((finalObj, path) => {
+			const insideIncludePaths =
+				!storageItem.includePaths ||
+				!storageItem.includePaths.length ||
+				storageItem.includePaths.includes(path)
 
-		if (
-			Array.isArray(storageItem.includePaths) &&
-			storageItem.includePaths.length
-		) {
-			state = storageItem.includePaths.reduce((finalObj, path) => {
-				if (
-					!hasExcludedPaths ||
-					(hasExcludedPaths && !storageItem.excludePaths?.includes(path))
-				)
-					finalObj[path] = store.$state[path]
-				return finalObj
-			}, {} as Partial<PiniaPluginContext['store']['$state']>)
-		} else {
-			if (hasExcludedPaths) {
-				Object.keys(store.$state).reduce((finalObj, path) => {
-					if (!storageItem.excludePaths?.includes(path))
-						finalObj[path] = store.$state[path]
-					return finalObj
-				}, {} as Partial<PiniaPluginContext['store']['$state']>)
-			}
-		}
+			const outsideExcludePaths =
+				!storageItem.excludePaths ||
+				!storageItem.excludePaths.length ||
+				!storageItem.excludePaths.includes(path)
+
+			if (insideIncludePaths && outsideExcludePaths)
+				finalObj[path] = store.$state[path]
+			return finalObj
+		}, {} as Partial<PiniaPluginContext['store']['$state']>)
 
 		storage.setItem(key, serialize(state))
 	}
