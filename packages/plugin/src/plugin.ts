@@ -3,7 +3,7 @@ import type {
 	PluginOptions,
 	PluginStorageItem,
 	StorageItem,
-	AsyncStorage,
+	Storage,
 } from './interface'
 import { isStorageItem } from './interface'
 
@@ -68,7 +68,7 @@ export function persistedStatePlugin(
 
 	const assertStorage =
 		pluginOptions?.assertStorage ||
-		((storage: Storage | AsyncStorage) => {
+		((storage: Storage) => {
 			const key = '@@'
 			const result = storage.setItem(key, '1')
 			const removeItem = function () {

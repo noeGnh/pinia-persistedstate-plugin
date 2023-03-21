@@ -73,15 +73,25 @@ importers:
   packages/playground:
     specifiers:
       '@arkn/pinia-persistedstate-plugin': workspace:*
+      '@types/js-cookie': ^3.0.3
+      js-cookie: ^3.0.1
+      json-stringify-safe: ^5.0.1
+      localforage: ^1.10.0
       pinia: ^2.0.33
+      secure-ls: ^1.2.6
       vite: ^4.1.0
       vue: ^3.2.45
       vue-tsc: ^1.0.24
     dependencies:
       '@arkn/pinia-persistedstate-plugin': link:../plugin
+      js-cookie: 3.0.1
+      json-stringify-safe: 5.0.1
+      localforage: 1.10.0
       pinia: 2.0.33_hmuptsblhheur2tugfgucj7gc4
+      secure-ls: 1.2.6
       vue: 3.2.47
     devDependencies:
+      '@types/js-cookie': 3.0.3
       vite: 4.1.1
       vue-tsc: 1.0.24_typescript@4.9.5
 
@@ -1535,6 +1545,13 @@ packages:
       }
     dev: true
 
+  /@types/js-cookie/3.0.3:
+    resolution:
+      {
+        integrity: sha512-Xe7IImK09HP1sv2M/aI+48a20VX+TdRJucfq4vfRVy6nWN8PYPOEnlMRSgxJAgYQIXJVL8dZ4/ilAM7dWNaOww==,
+      }
+    dev: true
+
   /@types/json-schema/7.0.11:
     resolution:
       {
@@ -2927,6 +2944,13 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /crypto-js/3.3.0:
+    resolution:
+      {
+        integrity: sha512-DIT51nX0dCfKltpRiXV+/TVZq+Qq2NgF4644+K7Ttnla7zEzqc+kjJyiB96BHNyUTBxyjzRcZYpUdZa+QAqi6Q==,
+      }
+    dev: false
 
   /cssesc/3.0.0:
     resolution:
@@ -4518,6 +4542,13 @@ packages:
     engines: { node: '>= 4' }
     dev: true
 
+  /immediate/3.0.6:
+    resolution:
+      {
+        integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==,
+      }
+    dev: false
+
   /import-fresh/3.3.0:
     resolution:
       {
@@ -4928,6 +4959,14 @@ packages:
       nopt: 6.0.0
     dev: true
 
+  /js-cookie/3.0.1:
+    resolution:
+      {
+        integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==,
+      }
+    engines: { node: '>=12' }
+    dev: false
+
   /js-sdsl/4.3.0:
     resolution:
       {
@@ -5033,6 +5072,13 @@ packages:
       }
     dev: true
 
+  /json-stringify-safe/5.0.1:
+    resolution:
+      {
+        integrity: sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==,
+      }
+    dev: false
+
   /json5/1.0.2:
     resolution:
       {
@@ -5115,6 +5161,15 @@ packages:
       type-check: 0.4.0
     dev: true
 
+  /lie/3.1.1:
+    resolution:
+      {
+        integrity: sha512-RiNhHysUjhrDQntfYSfY4MU24coXXdEOgw9WGcKHNeEwffDYbF//u87M1EWaMGzuFoSbqW0C9C6lEEhDOAswfw==,
+      }
+    dependencies:
+      immediate: 3.0.6
+    dev: false
+
   /lilconfig/2.0.6:
     resolution:
       {
@@ -5185,6 +5240,15 @@ packages:
       }
     engines: { node: '>=14' }
     dev: true
+
+  /localforage/1.10.0:
+    resolution:
+      {
+        integrity: sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==,
+      }
+    dependencies:
+      lie: 3.1.1
+    dev: false
 
   /locate-path/5.0.0:
     resolution:
@@ -5359,6 +5423,14 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /lz-string/1.5.0:
+    resolution:
+      {
+        integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==,
+      }
+    hasBin: true
+    dev: false
 
   /magic-string/0.25.9:
     resolution:
@@ -6622,6 +6694,16 @@ packages:
         integrity: sha512-4AsO/FrViE/iDNEPaAQlb77tf0csuq27EsVpy6ett584EcRTp6pTDLoGWVxCD77y5iU5FauOvhsI4o1APwPoSQ==,
       }
     dev: true
+
+  /secure-ls/1.2.6:
+    resolution:
+      {
+        integrity: sha512-g8vUSKl6elSfyAUHodybnNkuZW+mUYEOWj4SZIDg+xoQ1dq5ddktBoOFrtxQBUl88ZyAJOtGWQ1PRaOxkTAuZQ==,
+      }
+    dependencies:
+      crypto-js: 3.3.0
+      lz-string: 1.5.0
+    dev: false
 
   /semver/5.7.1:
     resolution:

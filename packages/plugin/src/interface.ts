@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { StateTree } from 'pinia'
 
-export interface AsyncStorage {
-	getItem: (key: string) => Promise<any>
-	setItem: (key: string, value: any) => Promise<void>
-	removeItem: (key: string) => Promise<void>
+export interface Storage {
+	getItem: (key: string) => any | Promise<any>
+	setItem: (key: string, value: any) => void | Promise<void>
+	removeItem: (key: string) => void | Promise<void>
 }
 
 export interface Serializer<S extends StateTree = StateTree> {
@@ -14,7 +14,7 @@ export interface Serializer<S extends StateTree = StateTree> {
 
 export interface StorageItem {
 	key?: string
-	storage?: Storage | AsyncStorage
+	storage?: Storage
 	includePaths?: string[]
 	excludePaths?: string[]
 	serializer?: Serializer
@@ -30,7 +30,7 @@ export interface PluginOptions {
 	storeKeysPrefix?: string
 	persistenceDefault?: boolean
 	storageItemsDefault?: PluginStorageItem[]
-	assertStorage?: (storage: Storage | AsyncStorage) => void | Promise<void>
+	assertStorage?: (storage: Storage) => void | Promise<void>
 	debug?: boolean
 }
 

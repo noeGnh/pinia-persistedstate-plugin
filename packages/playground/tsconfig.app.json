@@ -12,7 +12,8 @@
 		"lib": ["ESNext", "DOM"],
 		"skipLibCheck": true,
 		"noEmit": true,
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"types": ["@arkn/pinia-persistedstate-plugin"]
 	},
 	"include": [
 		"src/**/*.ts",
