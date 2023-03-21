@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { StateTree } from 'pinia'
 
 export interface AsyncStorage {
@@ -6,13 +7,17 @@ export interface AsyncStorage {
 	removeItem: (key: string) => Promise<void>
 }
 
-export interface StorageItem<S extends StateTree = StateTree> {
-	key?: string
-	storage?: Storage
-	includePaths?: string[]
-	excludePaths?: string[]
+export interface Serializer<S extends StateTree = StateTree> {
 	serialize?: (state: S) => any
 	deserialize?: (value: any) => any
+}
+
+export interface StorageItem {
+	key?: string
+	storage?: Storage | AsyncStorage
+	includePaths?: string[]
+	excludePaths?: string[]
+	serializer?: Serializer
 }
 
 export type PluginStorageItem = Omit<StorageItem, 'key'>
@@ -25,16 +30,29 @@ export interface PluginOptions {
 	storeKeysPrefix?: string
 	persistenceDefault?: boolean
 	storageItemsDefault?: PluginStorageItem[]
+	assertStorage?: (storage: Storage | AsyncStorage) => void | Promise<void>
+	debug?: boolean
 }
 
-export interface StoreOptions {
+export interface StoreOptions<S extends StateTree = StateTree> {
 	enabled?: boolean
 	storageItems?: StorageItem[]
+	beforeHydrate?: (oldState: S) => void
 }
 
 declare module 'pinia' {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	export interface DefineStoreOptionsBase<S, Store> {
 		persistence?: StoreOptions
+	}
+
+	export interface PiniaCustomProperties<
+		Id extends string = string,
+		S extends StateTree = StateTree,
+		G /* extends GettersTree<S> */ = _GettersTree<S>,
+		A /* extends ActionsTree */ = _ActionsTree
+	> {
+		$persistence: {
+			pending: boolean
+		}
 	}
 }
