@@ -2,7 +2,7 @@
 
 Handle Pinia state persistence easily.
 
-## ✨ Features
+## Features
 
 - Support multiple storages.
 - Can be configured globally and in every Pinia store.
@@ -61,6 +61,8 @@ persistencePlugin({
 - `storageItemsDefault?: PluginStorageItem[]`: Defaults to `localStorage`. List of storages.
 
 - `assertStorage?: (storage: Storage) => void | Promise<void>`: Perform a write and delete operation by default. To ensure `storages` is available.
+
+- `ensureAsyncStorageUpdateOrder?: boolean`: Ensure that the update of asynchronous storages is done in order
 
 - `debug?: boolean`: Defaults to `false`. Display errors and warnings in console.
 
@@ -263,7 +265,9 @@ defineStore('example', {
 })
 ```
 
-> This project is inspired by [`vuex-persistedstate`](https://github.com/robinvdvleuten/vuex-persistedstate) and [pinia-plugin-persist](https://github.com/Seb-L/pinia-plugin-persist).
+> You can see an example of a full implementation here [`here`](https://github.com/noeGnh/pinia-persistence-plugin/tree/master/packages/playground/src)
+
+This project is inspired by [vuex-persistedstate](https://github.com/robinvdvleuten/vuex-persistedstate) and [pinia-plugin-persist](https://github.com/Seb-L/pinia-plugin-persist).
 
 ## Contributing
 

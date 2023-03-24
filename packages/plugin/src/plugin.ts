@@ -4,10 +4,15 @@ import type {
 	PluginStorageItem,
 	StorageItem,
 	Storage,
+	UpdateAsyncStorageTask,
 } from './interface'
 import { isStorageItem } from './interface'
+import { genId } from './utils'
 
 export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
+	const asyncTasks: UpdateAsyncStorageTask[] = []
+	let currentAsyncTaskId: string | null = null
+
 	const getStoreKey = (
 		storageItem: PluginStorageItem | StorageItem,
 		defaultKey: string
@@ -21,14 +26,30 @@ export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 		)
 	}
 
+	const launchAsyncTasksListener = (): any => {
+		if (!currentAsyncTaskId && asyncTasks.length) {
+			updateStorage(
+				asyncTasks[0].storageItem,
+				asyncTasks[0].store,
+				getStoreKey(asyncTasks[0].storageItem, asyncTasks[0].store.$id),
+				asyncTasks[0].id
+			)
+		}
+
+		return setTimeout(launchAsyncTasksListener, 500)
+	}
+
 	const updateStorage = (
 		storageItem: PluginStorageItem | StorageItem,
 		store: PiniaPluginContext['store'],
-		key: string
+		key: string,
+		asyncTaskId?: string
 	) => {
+		let state = store.$state
+		if (asyncTaskId) currentAsyncTaskId = asyncTaskId
+
 		const storage = storageItem.storage || localStorage
 		const serialize = storageItem?.serializer?.serialize || JSON.stringify
-		let state = store.$state
 
 		state = Object.keys(store.$state).reduce((finalObj, path) => {
 			const insideIncludePaths =
@@ -52,10 +73,19 @@ export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 			if (result instanceof Promise) {
 				store.$persistence.pending = true
 				result
+					.then(function () {
+						if (asyncTaskId) {
+							asyncTasks.splice(
+								asyncTasks.findIndex((task) => asyncTaskId == task.id),
+								1
+							)
+						}
+					})
 					.catch(function () {
 						/* empty */
 					})
 					.finally(function () {
+						if (asyncTaskId) currentAsyncTaskId = null
 						store.$persistence.pending = false
 					})
 			}
@@ -104,6 +134,8 @@ export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 				persist = pluginOptions.persistenceDefault ?? true
 			} else persist = true
 		}
+		const ensureAsyncStorageUpdateOrder =
+			pluginOptions?.ensureAsyncStorageUpdateOrder ?? true
 
 		const hydrate = (storageItem: PluginStorageItem | StorageItem) => {
 			const storage = storageItem.storage || localStorage
@@ -163,13 +195,31 @@ export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 
 			context.store.$subscribe(() => {
 				storageItems.forEach((storageItem) => {
-					updateStorage(
-						storageItem,
-						context.store,
-						getStoreKey(storageItem, context.store.$id)
-					)
+					if (
+						ensureAsyncStorageUpdateOrder &&
+						(storageItem.storage?.getItem.constructor.name ===
+							'AsyncFunction' ||
+							storageItem.storage?.setItem.constructor.name ===
+								'AsyncFunction' ||
+							storageItem.storage?.removeItem.constructor.name ===
+								'AsyncFunction')
+					) {
+						asyncTasks.push({
+							id: genId(),
+							storageItem: storageItem,
+							store: context.store,
+						})
+					} else {
+						updateStorage(
+							storageItem,
+							context.store,
+							getStoreKey(storageItem, context.store.$id)
+						)
+					}
 				})
 			})
+
+			if (ensureAsyncStorageUpdateOrder) launchAsyncTasksListener()
 		}
 	}
 }

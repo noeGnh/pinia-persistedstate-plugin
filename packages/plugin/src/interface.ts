@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { StateTree } from 'pinia'
+import { StateTree, PiniaPluginContext } from 'pinia'
 
 export interface Storage {
 	getItem: (key: string) => any | Promise<any>
@@ -31,6 +31,7 @@ export interface PluginOptions {
 	persistenceDefault?: boolean
 	storageItemsDefault?: PluginStorageItem[]
 	assertStorage?: (storage: Storage) => void | Promise<void>
+	ensureAsyncStorageUpdateOrder?: boolean
 	debug?: boolean
 }
 
@@ -38,6 +39,12 @@ export interface StoreOptions<S extends StateTree = StateTree> {
 	enabled?: boolean
 	storageItems?: StorageItem[]
 	beforeHydrate?: (oldState: S) => void
+}
+
+export interface UpdateAsyncStorageTask {
+	id: string
+	storageItem: StorageItem
+	store: PiniaPluginContext['store']
 }
 
 declare module 'pinia' {
