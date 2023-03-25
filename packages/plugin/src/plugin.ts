@@ -26,6 +26,14 @@ export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 		)
 	}
 
+	const getFromStorageItem = (storageItem: PluginStorageItem | StorageItem) => {
+		return {
+			storage: storageItem.storage || localStorage,
+			serialize: storageItem?.serializer?.serialize || JSON.stringify,
+			deserialize: storageItem?.serializer?.deserialize || JSON.parse,
+		}
+	}
+
 	const launchAsyncTasksListener = (): any => {
 		if (!currentAsyncTaskId && asyncTasks.length) {
 			updateStorage(
@@ -45,13 +53,12 @@ export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 		key: string,
 		asyncTaskId?: string
 	) => {
-		let state = store.$state
+		const { storage, serialize, deserialize } = getFromStorageItem(storageItem)
+
+		let state = deserialize(serialize(store.$state))
 		if (asyncTaskId) currentAsyncTaskId = asyncTaskId
 
-		const storage = storageItem.storage || localStorage
-		const serialize = storageItem?.serializer?.serialize || JSON.stringify
-
-		state = Object.keys(store.$state).reduce((finalObj, path) => {
+		state = Object.keys(state).reduce((finalObj, path) => {
 			const insideIncludePaths =
 				!storageItem.includePaths ||
 				!storageItem.includePaths.length ||
@@ -63,7 +70,7 @@ export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 				!storageItem.excludePaths.includes(path)
 
 			if (insideIncludePaths && outsideExcludePaths)
-				finalObj[path] = store.$state[path]
+				finalObj[path] = state[path]
 			return finalObj
 		}, {} as Partial<PiniaPluginContext['store']['$state']>)
 
@@ -138,8 +145,8 @@ export function persistencePlugin(pluginOptions?: PluginOptions): PiniaPlugin {
 			pluginOptions?.ensureAsyncStorageUpdateOrder ?? true
 
 		const hydrate = (storageItem: PluginStorageItem | StorageItem) => {
-			const storage = storageItem.storage || localStorage
-			const deserialize = storageItem?.serializer?.deserialize || JSON.parse
+			const { storage, deserialize } = getFromStorageItem(storageItem)
+
 			const storeKey = getStoreKey(storageItem, context.store.$id)
 			const storageResult = storage.getItem(storeKey)
 
