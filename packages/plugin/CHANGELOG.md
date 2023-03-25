@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.0.3](https://github.com/noeGnh/pinia-persistedstate-plugin/compare/v0.0.2...v0.0.3)
+## [v0.0.4](https://github.com/noeGnh/pinia-persistedstate-plugin/compare/v0.0.3...v0.0.4)
+
+### Commits
+
+- refactor: make state unreactive for sync storages [`01a4a4b`](https://github.com/noeGnh/pinia-persistedstate-plugin/commit/01a4a4b65fe53a66a385477b06b8e07bb101326a)
+- chore: bump to v0.0.3 [`ccf9a74`](https://github.com/noeGnh/pinia-persistedstate-plugin/commit/ccf9a74d8b4497ddf7972df8aa5d5bb4d3cd0714)
+
+## [v0.0.3](https://github.com/noeGnh/pinia-persistedstate-plugin/compare/v0.0.2...v0.0.3) - 2023-03-24
 
 ### Commits
 
