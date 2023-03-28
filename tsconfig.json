@@ -1,17 +1,17 @@
 {
-	"files": [],
-	"compilerOptions": {
-		"strict": true,
-		"forceConsistentCasingInFileNames": true
-	},
-	"references": [
-		// Plugin
-		{
-			"path": "./packages/plugin/tsconfig.app.json"
-		},
-		// Playground
-		{
-			"path": "./packages/playground/tsconfig.app.json"
-		}
-	]
+  "files": [],
+  "compilerOptions": {
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "references": [
+    // Plugin
+    {
+      "path": "./packages/plugin/tsconfig.app.json"
+    },
+    // Playground
+    {
+      "path": "./packages/playground/tsconfig.app.json"
+    }
+  ]
 }
