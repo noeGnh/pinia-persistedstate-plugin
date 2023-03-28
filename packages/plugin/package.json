@@ -1,7 +1,7 @@
 {
   "name": "pinia-persistence-plugin",
   "description": "Pinia persistence plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": false,
   "author": "Noé Gnanih <noegnanih@gmail.com>",
   "license": "MIT",

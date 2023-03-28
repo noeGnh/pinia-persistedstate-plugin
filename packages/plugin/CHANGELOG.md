@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.0.4](https://github.com/noeGnh/pinia-persistedstate-plugin/compare/v0.0.3...v0.0.4)
+## [v0.0.5](https://github.com/noeGnh/pinia-persistedstate-plugin/compare/v0.0.4...v0.0.5)
+
+### Commits
+
+- chore: reformat code [`b6315f5`](https://github.com/noeGnh/pinia-persistedstate-plugin/commit/b6315f52eda97d8191d0ad97a8892c882b3b3ac2)
+- chore: bump to v0.0.4 [`0f60fa2`](https://github.com/noeGnh/pinia-persistedstate-plugin/commit/0f60fa235ad181f45b6dc119b63e5ca13ceebc9a)
+
+## [v0.0.4](https://github.com/noeGnh/pinia-persistedstate-plugin/compare/v0.0.3...v0.0.4) - 2023-03-25
 
 ### Commits
 
